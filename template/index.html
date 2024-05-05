@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="ManuKai" />
+    <meta
+      name="description"
+      content="Watch all your favourites movies and tv-shows"
+    />
+    <title>CINESPECTRA</title>
+    <link
+      rel="shortcut icon"
+      href="{% static 'img/icon.png' %} "
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/eva-icons"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'index2.css' %}" />
+    {% block head %}{% endblock head %}
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid w-100">
+        <div class="nav-bar">
+          <div class="logo">
+            <a href="{% url 'index' %}"><h1>Cinespectra</h1></a>
+          </div>
+
+          <div class="nav-tab drop-menu">
+            <form class="search-bar" action="{% url 'search' %}" method="GET">
+              <input type="search" placeholder="search" name="search" />
+              <button class="button bg-transparent border-0" type="submit" ><i
+                
+                data-eva="search-outline"
+                data-eva-fill="white"
+                data-eva-height="28"
+                data-eva-width="28"
+              ></i></button>
+            </form>
+
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'movie_list' %}">Movies</a>
+            <a href="{% url 'series' %}">Series</a>
+            <a href="{% url 'request' %}">Request</a>
+            <div class="drpdown">
+               <button class="drp-btn" onclick="dropDown()">Genre</button>
+               <div class="drp-menu">
+                {% for genre in genres %}
+                <a href="{% url 'genre' pk=genre.pk  movie_type='Single' %}">{{genre.name}}</a>
+                {% endfor %}
+               </div>
+            </div>
+          </div>
+          <i
+            onclick="showMenu()"
+            class="menu-bar"
+            data-eva="menu-outline"
+            data-eva-fill="white"
+            data-eva-height="28"
+            data-eva-width="28"
+          ></i>
+        </div>
+      </div>
+      {% block content %}
+      <div class="movie">
+        <div class="movie-detail">
+          <a href="{% url "detail" pk=hot.pk %}"><h2>{{hot.title}}</h2></a>
+
+          <div class="movie-description">
+            <h3>Overview</h3>
+            <p class="overview-text">{{hot.description}}</p>
+          </div>
+          <div class="movie-btns">
+            <span class="watch-bar"
+              ><a href="{% url 'detail' pk=hot.pk %}">WATCH NOW</a>
+              <i
+                data-eva="arrow-right-outline"
+                data-eva-fill="white"
+                data-eva-height="30"
+                data-eva-width="30"
+              ></i>
+            </span>
+            <button class="trailer-btn">Trailer</button>
+          </div>
+
+          <div class="trailer">{{hot.iframe_code|safe}}</div>
+        </div>
+
+        <div class="movie-pic">
+          <img src="{{hot.img_url}}" alt="{{movie.title}}" />
+        </div>
+      </div>
+    </header>
+    <section class="trending-container">
+      <h2>
+        TRENDING <i class="bx bxs-hot bx-flashing" style="color: #f90909"></i>
+      </h2>
+
+      <div class="trending">
+        <div class="trending-pics">
+          {% for movie in trending %}
+          <div class="slide">
+            <a href="{% url "detail" pk=movie.pk %}"
+              ><img src="{{movie.img_url}}" alt="{{movie.title}}"
+            /></a>
+          </div>
+          {% endfor %}
+        </div>
+        <i
+          id="prev"
+          onclick="moveslide(-1)"
+          class="swiper-btn"
+          data-eva="arrow-ios-back-outline"
+          data-eva-fill="white"
+          data-eva-height="50"
+          data-eva-width="50"
+        ></i>
+        <i
+          id="next"
+          class="swiper-btn"
+          onclick="moveslide(1)"
+          data-eva="arrow-ios-forward-outline"
+          data-eva-fill="white"
+          data-eva-height="50"
+          data-eva-width="50"
+        ></i>
+      </div>
+
+      <div class="teaser-container">
+        <h2>TEASERS</h2>
+        <div class="teaser">
+          {% for movie in upcoming %}
+          <div class="teaser-flyer">
+            <img src="{{movie.img_url}}" alt="{{movie.title}}" />
+            <i
+              onclick="showTeaser(this)"
+              class="teaser-btn"
+              data-eva="play-circle-outline"
+              data-eva-fill="yellow"
+              data-eva-height="70"
+              data-eva-width="70"
+            ></i>
+            <div class="teaser-video">
+              <i class="bx bx-x bx-lg" onclick="hideTeaser(this)"></i>
+              {{movie.iframe_code|safe}}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endblock content %}
+    <!--Js link-->
+
+    <script src="{% static 'index3.js' %}"></script>
+    {% block js %}{% endblock js %}
+    <script>
+      eva.replace();
+    </script>
+  </body>
+</html>

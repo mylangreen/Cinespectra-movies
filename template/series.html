@@ -1,0 +1,19 @@
+{% extends "movie_list.html" %}
+{% block genre %} 
+    <div class="genre">
+      <h3>GENRES</h3>
+
+      <ul class="w-100">
+        {% for genre in genres %}
+        <li><a href="{% url "genre" pk=genre.pk movie_type="Seasonal" %}">{{genre}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endblock genre %} 
+{% block series %} {% for movie in movies %}
+
+<a href="{% url "detail" pk=movie.pk %}" class="movie-flyer">
+  <img src="{{movie.img_url}}" alt="{{movie.title}}" />
+</a>
+
+{% endfor %} {% endblock series %}

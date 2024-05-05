@@ -1,0 +1,20 @@
+{% extends "movie_list.html" %} 
+{% block genre %}{% endblock genre %}
+{% block series %}
+
+
+{% if movies %}
+{% for movie in movies %}
+
+<a href="{% url "detail" pk=movie.pk %}" class="movie-flyer">
+  <img src="{{movie.img_url}}" alt="{{movie.title}}" />
+</a>
+
+{% endfor %} 
+
+{% else %}
+
+<h2 class="text-bg-dark" >No movie of the genre available ! You can request the movie in the request tab</h2>
+
+{% endif %}
+{% endblock series %}

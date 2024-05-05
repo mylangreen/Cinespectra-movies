@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% load static %}
+{% block head %} {{block.super}}
+<link rel="stylesheet" href="{% static "thank_you.css" %}">
+{% endblock head %} 
+{% block content %}
+<div class="container">
+    <p>
+      <em>Thank You</em>,Your movie request will be added soon!
+    </p>
+</div>
+{% endblock content %}
+    

@@ -1,0 +1,84 @@
+{% extends "index.html" %} {% load static %} {% block head %}{{block.super}}
+<link rel="stylesheet" href="{% static "detail1.css" %}" />{% endblock head %} 
+{% block content %}
+<div class="container px-0 py-2">
+  <div class="detail-container">
+    <div class="poster">
+      <img src="{{movie.img_url}}" alt="{{movie.title}}" />
+      {% if movie.video_url %}
+       <a class="play-btn" href="{{movie.video_url}}"><i class="bx bx-play-circle bx-lg bx-tada"></i></a>
+       {% else %}
+       <a class="play-btn" href="{{movie.video_url}}"></i></a>
+       {% endif %}
+      <span>{{movie.rate}}</span>
+    </div>
+    <div class="detail">
+      <h2>{{movie.title}} </h2>
+      <div class="description">
+        <h3>Overview</h3>
+        <p>
+          {{movie.description}}
+        </p>
+      </div>
+
+      <div class="genre">
+        <span>GENRE :</span>
+        {% if movie.type == 'Single' %}
+        {% for genre in movie.genre.all %}
+        <a href="{% url 'genre' pk=genre.pk movie_type='Single' %}">{{genre}}</a>
+        {% endfor %}
+        {% else %}
+        {% for genre in movie.genre.all %}
+        <a href="{% url 'genre' pk=genre.pk movie_type='Seasonal' %}">{{genre}}</a>
+        {% endfor %}
+        {% endif %}
+        
+      </div>
+      <div class="detail-trailer">
+        {{movie.iframe_code|safe}}
+
+        <i class="bx bx-x bx-lg" onclick="hideTeaser(this)"></i>
+      </div>
+
+      <div class="btn">
+        
+        <button id="trailer" onclick="showTrailer()">trailer</button>
+      </div>
+    </div>
+    <div class="similar">
+      <h3>Similar Movies</h3>
+      <div class="movies">
+        {% for movie in similar_movies %}
+        <a href="{% url "detail" pk=movie.pk %}"><img src="{{movie.img_url}}" alt="{{movie.title}}" loading="eager" /></a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="seasons w-100">
+    {% for season in movie.seasons.all %}
+      <a href="{% url "season" season.pk %}" class="season">Season {{season.number}}</a>
+    {% endfor %}
+  </div>
+ 
+  <section class="cast-container">
+    <h2>CAST</h2>
+    <div class="cast">
+      {% for actor in cast %}
+      <div class="cast-card">
+        <img
+          src="{{actor.img_url}}"
+          alt="{{actor.name}}"
+        />
+        <div class="cast-name">
+          <b>{{actor.name}}</b><br />
+          <span>{{actor.role}}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock content %} 
+{% block js %}
+<script src="{% static "detail2.js" %}"></script>
+{% endblock js %}

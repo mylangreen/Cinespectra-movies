@@ -1,0 +1,31 @@
+{% extends "index.html" %} {% load static %} {% block head %} {{block.super}}
+<link rel="stylesheet" href="{% static 'movies1.css' %}" />
+{% endblock head %} {% block content %}
+
+<div class="container-fluid">
+  <div class="movie-container">
+    {% block genre %} 
+    <div class="genre">
+      <h3>GENRES</h3>
+
+      <ul class="w-100">
+        {% for genre in genres %}
+        <li><a href="{% url "genre" pk=genre.pk movie_type="Single" %}">{{genre}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endblock genre %}
+
+    <div class="movies">
+      {% block series %} {% for movie in movies %}
+      <div class="movie-flyer">
+        <a href="{% url 'detail' pk=movie.pk %}"
+          ><img src="{{movie.img_url}}" alt="{{movie.title}}"
+        /></a>
+      </div>
+      {% endfor %} {% endblock series %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
