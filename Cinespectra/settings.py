@@ -86,23 +86,23 @@ WSGI_APPLICATION = 'Cinespectra.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#       'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#  }
-#}
-
 DATABASES = {
-'default':{
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('NAME'),
-        'USER': os.environ.get('USER'),
-        'PASSWORD': os.environ.get('PASSWORD'),
-        'HOST': os.environ.get('HOST'),
-        'PORT': os.environ.get('PORT'),
-    }
+    'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+  }
 }
+
+#DATABASES = {
+#'default':{
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': os.environ.get('NAME'),
+#        'USER': os.environ.get('USER'),
+#        'PASSWORD': os.environ.get('PASSWORD'),
+#        'HOST': os.environ.get('HOST'),
+#        'PORT': os.environ.get('PORT'),
+#    }
+#}
 #DATABASES = {
 #'default':{
 #        'ENGINE': 'django.db.backends.postgresql',
@@ -113,7 +113,8 @@ DATABASES = {
 #       'PORT': '5432',
 #    }
 #}
-#DATABASES['default'] = dj_database_url.parse('postgres://cinespectra_mvbo_user:sQIY1h4p0L3DH41zer5RBAV4pHf8PEDh@dpg-coropcq0si5c739jtqq0-a.singapore-postgres.render.com/cinespectra_mvbo')
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(os.environ.get(database_url))
 
 
 # Password validation
