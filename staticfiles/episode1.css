@@ -1,0 +1,21 @@
+.container {
+    width: 80%;
+    background-color: rgba(0, 153, 255, 0);
+    color: white;
+    height: 100vh;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+}
+.episodes {
+    display: flex;
+    flex-direction: column;
+}
+.episodes a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.episodes a:hover {
+    color: orange;
+}

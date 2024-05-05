@@ -37,7 +37,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG','False') == 'True'
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+#ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -96,11 +97,11 @@ DATABASES = {
 #DATABASES = {
 #'default':{
 #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': os.environ.get('NAME'),
-#        'USER': os.environ.get('USER'),
-#        'PASSWORD': os.environ.get('PASSWORD'),
-#        'HOST': os.environ.get('HOST'),
-#        'PORT': os.environ.get('PORT'),
+#        'NAME':'cinespectra_mvbo',
+#        'USER': 'cinespectra_mvbo_user',
+#        'PASSWORD': 'sQIY1h4p0L3DH41zer5RBAV4pHf8PEDh',
+#        'HOST': 'dpg-coropcq0si5c739jtqq0-a.singapore-postgres.render.com',
+#        'PORT': '5432',
 #    }
 #}
 #DATABASES = {
@@ -113,6 +114,7 @@ DATABASES = {
 #       'PORT': '5432',
 #    }
 #}
+
 database_url = os.environ.get("DATABASE_URL")
 DATABASES['default'] = dj_database_url.parse(database_url)
 
@@ -155,6 +157,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR / 'static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
