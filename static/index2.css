@@ -207,7 +207,8 @@ section h2 {
   transform: all 0.3s ease;
 }
 .slide {
-  flex: 0 0 24%; /* Each slide occupies half of the slider container */
+  width: 40%;
+  max-width: 200px;
 }
 .trending img {
   border-radius: 1em;
