@@ -182,8 +182,7 @@ header {
   scale: 1.1;
 }
 .trending-container {
-  padding: 0 5%;
-  margin: 80px 0;
+  width: 100%;
 }
 section h2 {
   color: red;
@@ -193,9 +192,7 @@ section h2 {
 .trending {
   position: relative;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  padding: 0 0;
   width: 100%;
   height: auto;
   overflow: hidden;
@@ -205,10 +202,8 @@ section h2 {
   height: auto;
   display: flex;
   justify-content: space-evenly;
-  column-gap: 1%;
   flex-wrap: nowrap;
   overflow: hidden;
-  white-space: nowrap;
   transform: all 0.3s ease;
 }
 .slide {
