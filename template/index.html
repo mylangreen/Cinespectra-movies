@@ -10,6 +10,13 @@
       content="Watch all your favourites movies and tv-shows"
     />
     <title>CINESPECTRA</title>
+    <link rel="preload" href="{% static 'img/your-background-image.jpg' %}" as="image">
+  <style>
+    body {
+      background-image: url("{% static 'img/your-background-image.jpg' %}");
+      /* Other CSS properties */
+    }
+  </style>
     <link
       rel="shortcut icon"
       href="{% static 'img/icon.png' %} "
