@@ -197,10 +197,12 @@ section h2 {
   align-items: center;
   padding: 0 0;
   width: 100%;
+  height: auto;
   overflow: hidden;
 }
 .trending-pics {
   width: 100%;
+  height: auto;
   display: flex;
   justify-content: space-evenly;
   column-gap: 1%;
@@ -211,16 +213,17 @@ section h2 {
 }
 .slide {
   width: 45%;
+  height: auto;
   max-width: 200px;
 }
-.trending img {
+.slide img {
   border-radius: 1em;
   object-fit: cover;
   object-position: center;
   width: 100%;
   transition: 0.3s ease;
 }
-.trending img:hover {
+.slide img:hover {
   scale: 1.1;
 }
 #prev {
