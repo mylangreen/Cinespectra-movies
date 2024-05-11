@@ -21,17 +21,17 @@ ul li {
   padding: 0;
 }
 .movies {
-  padding: 0 2%;
   display: flex;
-  justify-content: stretch;
+  justify-content: space-evenly;
   width: 80%;
+  height: auto;
   flex-wrap: wrap;
 }
 
 .movie-flyer {
   width: 45%;
   max-width: 200px;
-  padding: 0 1% 1% 0;
+  margin: 10px;
   cursor: pointer;
   border-radius: 1em;
   transition: all ease 0.3s;
